@@ -1,4 +1,4 @@
-# Mushroom Garden
+# 🍄🚜🛖
 
 Then, run
 
