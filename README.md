@@ -7,7 +7,7 @@
 <h1>Kombucha</h1>
 
 <p>
-A lightweight, open-source, and privacy-friendly app-usage tracking platform for tracking logs and events.
+A lightweight, open-source, and privacy-friendly app-usage tracking platform that supports logging both logs and events
 </p>
 
 <br />
@@ -44,7 +44,7 @@ A lightweight, open-source, and privacy-friendly app-usage tracking platform for
 
 ## Description
 
-Kombucha Analytics is a lightweight, open-source, and privacy-friendly app-usage tracking platform tool that supports both logging logs and events, providing a comprehensive solution for all your usage tracking needs. With Kombucha Analytics, the only requirement is a MongoDB database, making it easy to integrate into your existing infrastructure.
+Kombucha Analytics is a lightweight, open-source, and privacy-friendly app-usage tracking platform that supports logging both logs and events, providing a comprehensive solution for all your usage tracking needs. With Kombucha Analytics, the only requirement is a MongoDB database, making it easy to integrate into your existing infrastructure.
 
 The platform can be easily deployed on platforms like Vercel and Netlify, leveraging serverless functions for efficient operation. This flexibility allows you to seamlessly incorporate Kombucha Analytics into your preferred hosting environment.
 
@@ -135,14 +135,12 @@ This work is licensed under
 If you are using this software or reusing the source code from this repository for any purpose, please cite:
 
 ```bash
-    ADD Citation here
+    Coming soon
 ```
 
 ## Acknowledgements
 
 This project is funded by the NIH under award number 1OT2OD030213-01 . The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
-
-Add any other acknowledgements here.
 
 <br />
 
