@@ -7,7 +7,7 @@
 <h1>Kombucha</h1>
 
 <p>
-A free and open-source analytics platform offering valuable insights as an alternative to Umami and Google Analytics. 🍄🚜🛖
+A lightweight, open-source, and privacy-friendly app-usage tracking platform for comprehensive tracking of logs and events.
 </p>
 
 <br />
@@ -44,13 +44,24 @@ A free and open-source analytics platform offering valuable insights as an alter
 
 ## Description
 
-Kombucha is a specialized platform designed as an alternative to Umami and Google Analytics, providing a comprehensive solution for users within the FairdataiHub organization. It offers valuable insights and data-driven information to optimize application performance and usage. With robust sign-in and application-related capabilities, Kombucha serves as an all-in-one solution. Additionally, it incorporates event-based alert monitoring and combines logs and events into a unified platform. Kombucha aims to merge two products into one, creating a free and open-source platform that can be easily hosted on Netlify or Vercel. It is important to note that Kombucha is not intended for user or web tracking purposes. Rather, it operates as a REST web endpoint, allowing developers to intentionally store data from any source that accesses the internet. By default, Kombucha does not automatically track click events, page navigation, or similar user interactions. Developers must intentionally send this information if they wish to store it on the platform.
+Kombucha Analytics is a lightweight, open-source, and privacy-friendly app-usage tracking platform tool that supports both logging logs and events, providing a comprehensive solution for all your usage tracking needs. With Kombucha Analytics, the only requirement is a MongoDB database, making it easy to integrate into your existing infrastructure.
+
+The platform can be easily deployed on platforms like Vercel and Netlify, leveraging serverless functions for efficient operation. This flexibility allows you to seamlessly incorporate Kombucha Analytics into your preferred hosting environment.
+
+Visualize your tracked data with the built-in frontend, which can be customized to suit your specific preferences. Gain valuable insights into user behavior and app performance without compromising on privacy.
+Kombucha Analytics also offers advanced alert monitoring capabilities, ensuring proactive issue resolution based on tracked events. By promptly addressing any concerns in your app, you can deliver an exceptional user experience.
+
+It is important to note that Kombucha is not intended for user or web tracking purposes. Rather, it operates as a REST web endpoint, allowing developers to intentionally store data from any source that accesses the internet. By default, Kombucha does not automatically track click events, page navigation, or similar user interactions. Developers must intentionally send this information if they wish to store it on the platform.
+Choose Kombucha Analytics as your go-to solution for powerful, privacy-conscious, and user-friendly app usage tracking.
+
 
 ## Getting Started
 
 ### Prerequisites/Dependencies
 
 [Node.js](https://nodejs.org/en/) (v18 or higher)
+
+[Yarn package manager](https://yarnpkg.com/getting-started/install) (v1.22 or higher)
 
 **Front-end Framework:** The front-end of the application is built with TypeScript and Next.js, which provides a fast and efficient way to develop modern web applications.
 
@@ -83,6 +94,7 @@ MONGODB_DBNAME
 GITHUB_ID
 GITHUB_SECRET
 GITHUB_ORG
+NEXTAUTH_SECRET
 ```
 
 Start the application:
