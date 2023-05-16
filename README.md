@@ -1,15 +1,13 @@
 <div align="center">
 
-<a href="https://fairdataihub.org/">
-  <img src="https://fairdataihub.org/logo.svg" alt="logo" width="600" height="auto" />
-</a>
+<img src="https://freesvg.org/img/1653682897science-svgrepo-com.png" alt="logo" width="200" height="auto" />
 
 <br />
 
-<h1>Analytics</h1>
+<h1>Kombucha</h1>
 
 <p>
-Analytics for the fairdataihub organization 🍄🚜🛖
+A free and open-source analytics platform offering valuable insights as an alternative to Umami and Google Analytics. 🍄🚜🛖
 </p>
 
 <br />
@@ -46,7 +44,7 @@ Analytics for the fairdataihub organization 🍄🚜🛖
 
 ## Description
 
-This web application provides users from the FairdataiHub organization with the ability to sign in and access analytics for the applications developed by the organization. The application aims to provide valuable insights and data-driven information to help users understand and optimize their applications' performance and usage.
+Kombucha is a specialized platform designed as an alternative to Umami and Google Analytics, providing a comprehensive solution for users within the FairdataiHub organization. It offers valuable insights and data-driven information to optimize application performance and usage. With robust sign-in and application-related capabilities, Kombucha serves as an all-in-one solution. Additionally, it incorporates event-based alert monitoring and combines logs and events into a unified platform. Kombucha aims to merge two products into one, creating a free and open-source platform that can be easily hosted on Netlify or Vercel using their free/pro tiers. It is important to note that Kombucha is not intended for user or web tracking purposes. Rather, it operates as a REST web endpoint, allowing developers to intentionally store data from any source that accesses the internet. By default, Kombucha does not automatically track click events, page navigation, or similar user interactions. Developers must intentionally send this information if they wish to store it on the platform.
 
 ## Getting Started
 
@@ -135,3 +133,13 @@ Add any other acknowledgements here.
 <br />
 
 ---
+
+<br />
+
+<div align="center">
+
+<a href="https://fairdataihub.org/">
+  <img src="https://fairdataihub.org/logo.svg" alt="logo" width="600" height="auto" />
+</a>
+
+</div>
