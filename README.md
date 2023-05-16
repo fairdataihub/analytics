@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://freesvg.org/img/1653682897science-svgrepo-com.png" alt="logo" width="200" height="auto" />
+<img src="https://fairdataihub.org/logo.svg" alt="logo" width="200" height="auto" />
 
 <br />
 
@@ -13,16 +13,16 @@ Analytics for the fairdataihub organization 🍄🚜🛖
 <br />
 
 <p>
-  <a href="https://github.com/AI-READI/template/graphs/contributors">
+  <a href="https://github.com/fairdataihub/analytic/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/fairdataihub/analytics.svg?style=flat-square" alt="contributors" />
   </a>
-  <a href="https://github.com/AI-READI/template/stargazers">
+  <a href="https://github.com/fairdataihub/analytics/stargazers">
     <img src="https://img.shields.io/github/stars/fairdataihub/analytics.svg?style=flat-square" alt="stars" />
   </a>
-  <a href="https://github.com/AI-READI/template/issues/">
+  <a href="https://github.com/fairdataihub/analytics/issues/">
     <img src="https://img.shields.io/github/issues/fairdataihub/analytics.svg?style=flat-square" alt="open issues" />
   </a>
-  <a href="https://github.com/AI-READI/template/blob/main/LICENSE">
+  <a href="https://github.com/fairdataihub/analytics/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/fairdataihub/analytics.svg?style=flat-square" alt="license" />
   </a>
 </p>
@@ -32,7 +32,7 @@ Analytics for the fairdataihub organization 🍄🚜🛖
   <span> · </span>
     <a href="#">Changelog</a>
   <span> · </span>
-    <a href="https://github.com/AI-READI/template/issues/">Report Bug</a>
+    <a href="https://github.com/fairdataihub/analytics/issues/">Report Bug</a>
   <span> · </span>
     <a href="#">Request Feature</a>
   </h4>
@@ -44,25 +44,48 @@ Analytics for the fairdataihub organization 🍄🚜🛖
 
 ## Description
 
-This is a web app that allows users from the fairdataihub organization to sign in and view analytics for the applications built by the organization.
+This web application provides users from the FairdataiHub organization with the ability to sign in and access analytics for the applications developed by the organization. The application aims to provide valuable insights and data-driven information to help users understand and optimize their applications' performance and usage.
 
 ### Prerequisites/Dependencies
 
-The front-end of the app is built using Next.js and styled with Tailwind.css meanwhile the database is built with MongoDB. The app authenticates users with OAuth2 using the GitHub API.
+Front-end Framework: The front-end of the application is built with TypeScript and Next.js, which provides a fast and efficient way to develop modern web applications.
+
+Styling: The app's UI is styled using Tailwind.css, a highly customizable CSS framework that enables rapid development and consistent design.
+
+Database: MongoDB is used as the database for this project, providing a flexible and scalable solution for data storage.
+
+User Authentication: The app authenticates users using OAuth2 and integrates with the GitHub API. This allows users to securely log in to the application using their GitHub credentials.
 
 ### Installing
 
-Run to install dependencies
+To set up the project locally, follow these steps:
+Clone the repository: git clone [repository URL]
 
+Install the required dependencies:
 ```bash
 yarn install
 ```
+Configure the OAuth2 authentication with the FairdataiHub organization's credentials, and obtain the client ID and client secret.
+Create a `.env.local` file in the root directory of the project and add the following environment variables:
 
-To start the server run
+```bash
+MONGODB_URI
+MONGODB_DBNAME
+GITHUB_ID
+GITHUB_SECRET
+GITHUB_ORG
+```
+
+Start the application:
 
 ```bash
 yarn dev
 ```
+
+Access the application in your browser at http://localhost:3000
+
+**Note**
+Signing in to the application requires a GitHub account that is a member of the FairdataiHub organization. To change to a different organization, update the `GITHUB_ORG` environment variable in the `.env.local` file.
 
 ### Contributing
 
@@ -83,7 +106,7 @@ To report any issues with the software, suggest improvements, or request a new f
 This work is licensed under
 [MIT](https://opensource.org/licenses/mit). See [LICENSE](https://github.com/fairdataihub/analytics/blob/main/LICENSE) for more information.
 
-<a href="https://aireadi.org" >
+<a href="https://fairdataihub.org/" >
   <img src="https://www.channelfutures.com/files/2017/04/3_0.png" height="30" />
 </a>
 
