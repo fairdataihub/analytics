@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://fairdataihub.org/logo.svg" alt="logo" width="200" height="auto" />
+<img src="https://fairdataihub.org/logo.svg" alt="logo" width="600" height="auto" />
 
 <br />
 
@@ -59,15 +59,19 @@ User Authentication: The app authenticates users using OAuth2 and integrates wit
 ### Installing
 
 To set up the project locally, follow these steps:
-Clone the repository: git clone [repository URL]
+
+Clone the repository:
+```bash
+git clone [repository URL]
+```
 
 Install the required dependencies:
 ```bash
 yarn install
 ```
+
 Configure the OAuth2 authentication with the FairdataiHub organization's credentials, and obtain the client ID and client secret.
 Create a `.env.local` file in the root directory of the project and add the following environment variables:
-
 ```bash
 MONGODB_URI
 MONGODB_DBNAME
@@ -77,15 +81,14 @@ GITHUB_ORG
 ```
 
 Start the application:
-
 ```bash
 yarn dev
 ```
 
 Access the application in your browser at http://localhost:3000
 
-**Note**
-Signing in to the application requires a GitHub account that is a member of the FairdataiHub organization. To change to a different organization, update the `GITHUB_ORG` environment variable in the `.env.local` file.
+>**Note**:
+>Signing in to the application requires a GitHub account that is a member of the FairdataiHub organization. To change to a different organization, update the `GITHUB_ORG` environment variable in the `.env.local` file.
 
 ### Contributing
 
