@@ -48,13 +48,14 @@ This web application provides users from the FairdataiHub organization with the 
 
 ### Prerequisites/Dependencies
 
-Front-end Framework: The front-end of the application is built with TypeScript and Next.js, which provides a fast and efficient way to develop modern web applications.
+**Front-end Framework:** The front-end of the application is built with TypeScript and Next.js, which provides a fast and efficient way to develop modern web applications.
 
-Styling: The app's UI is styled using Tailwind.css, a highly customizable CSS framework that enables rapid development and consistent design.
+**Styling:** The app's UI is styled using Tailwind.css, a highly customizable CSS framework that enables rapid development and consistent design.
 
-Database: MongoDB is used as the database for this project, providing a flexible and scalable solution for data storage.
+**Database:** MongoDB is used as the database for this project, providing a flexible and scalable solution for data storage.
 
-User Authentication: The app authenticates users using OAuth2 and integrates with the GitHub API. This allows users to securely log in to the application using their GitHub credentials.
+**User Authentication:** The app authenticates users using OAuth2 and integrates with the GitHub API. This allows users to securely log in to the application using their GitHub credentials.
+
 
 ### Installing
 
@@ -70,7 +71,7 @@ Install the required dependencies:
 yarn install
 ```
 
-Configure the OAuth2 authentication with the FairdataiHub organization's credentials, and obtain the client ID and client secret.
+Configure the OAuth2 authentication with the FairdataiHub organization's credentials (or your own Oauth2 credentials), and obtain the client ID and client secret.
 Create a `.env.local` file in the root directory of the project and add the following environment variables:
 ```bash
 MONGODB_URI
@@ -102,7 +103,7 @@ For any developmental standards to follow, add them directly to the [CONTRIBUTIN
 
 ## Issues and Feedback
 
-To report any issues with the software, suggest improvements, or request a new feature, please open a new issue via the [Issues](https://github.com/fairdataihub/analytics/issues) tab. Provide adequate information (operating system, steps leading to error, screenshots) so we can help you efficiently.
+To report any issues with the web application, suggest improvements, or request a new feature, please open a new issue via the [Issues](https://github.com/fairdataihub/analytics/issues) tab. Provide adequate information (browser, steps leading to error, screenshots) so we can help you efficiently.
 
 ## License
 
