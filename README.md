@@ -7,7 +7,7 @@
 <h1>Kombucha</h1>
 
 <p>
-A lightweight, open-source, and privacy-friendly app-usage tracking platform for comprehensive tracking of logs and events.
+A lightweight, open-source, and privacy-friendly app-usage tracking platform for tracking logs and events.
 </p>
 
 <br />
@@ -78,7 +78,7 @@ To set up the project locally, follow these steps:
 
 Clone the repository:
 ```bash
-git clone [repository URL]
+git clone https://github.com/fairdataihub/analytics.git
 ```
 
 Install the required dependencies:
