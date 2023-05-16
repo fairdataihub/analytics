@@ -1,5 +1,3 @@
-# 🍄🚜🛖
-
 <div align="center">
 
 <img src="https://freesvg.org/img/1653682897science-svgrepo-com.png" alt="logo" width="200" height="auto" />
@@ -9,7 +7,7 @@
 <h1>Analytics</h1>
 
 <p>
-Analytics for the fairdataihub organization
+Analytics for the fairdataihub organization 🍄🚜🛖
 </p>
 
 <br />
