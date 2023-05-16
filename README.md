@@ -6,10 +6,10 @@
 
 <br />
 
-<h1>Project Title</h1>
+<h1>Analytics</h1>
 
 <p>
-Project one-liner description
+Analytics for the fairdataihub organization
 </p>
 
 <br />
