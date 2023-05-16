@@ -50,6 +50,8 @@ Kombucha is a specialized platform designed as an alternative to Umami and Googl
 
 ### Prerequisites/Dependencies
 
+[Node.js](https://nodejs.org/en/) (v18 or higher)
+
 **Front-end Framework:** The front-end of the application is built with TypeScript and Next.js, which provides a fast and efficient way to develop modern web applications.
 
 **Styling:** The app's UI is styled using Tailwind.css, a highly customizable CSS framework that enables rapid development and consistent design.
