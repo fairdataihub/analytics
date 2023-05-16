@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="https://fairdataihub.org/logo.svg" alt="logo" width="600" height="auto" />
+<a href="https://fairdataihub.org/">
+  <img src="https://fairdataihub.org/logo.svg" alt="logo" width="600" height="auto" />
+</a>
 
 <br />
 
@@ -45,6 +47,8 @@ Analytics for the fairdataihub organization 🍄🚜🛖
 ## Description
 
 This web application provides users from the FairdataiHub organization with the ability to sign in and access analytics for the applications developed by the organization. The application aims to provide valuable insights and data-driven information to help users understand and optimize their applications' performance and usage.
+
+## Getting Started
 
 ### Prerequisites/Dependencies
 
