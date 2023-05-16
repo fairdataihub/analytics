@@ -45,6 +45,7 @@ const options = {
       return session;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 }
 
 const func = (req, res) => NextAuth(req, res, options)
