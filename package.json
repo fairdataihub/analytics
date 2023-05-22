@@ -7,8 +7,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "11.10.6",
-    "@emotion/server": "11.10.0",
+    "@emotion/react": "11.11.0",
+    "@emotion/server": "11.11.0",
     "@iconify/react": "4.1.0",
     "@mantine/carousel": "6.0.11",
     "@mantine/core": "6.0.11",
