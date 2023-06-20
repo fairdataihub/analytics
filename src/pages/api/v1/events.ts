@@ -58,11 +58,15 @@ export default async function handler(
       }
 
       const token = sanitize(authorization?.split(' ')[1])
+      console.log("token", token);
 
       if (validator.isUUID(token, 4)) {
+        console.log("uuid not valid")
         res.status(401).json({ error: 'authorization is not valid' })
         return
       }
+
+      console.log("valid?")
 
       if (!body.uid) {
         res.status(400).json({ error: 'uid is required' })
@@ -89,6 +93,8 @@ export default async function handler(
       const ipAddress = requestIp.getClientIp(req)
 
       // verify user
+      const check = await metadb.collection('users')
+      console.log("check", check)
 
       const user = await metadb.collection('users').findOne({
         uid,
