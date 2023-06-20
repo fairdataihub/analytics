@@ -26,6 +26,9 @@ export default async function handler(
     origin: '*',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
+  
+  const client = await clientPromise
+  const db = client.db(process.env.MONGODB_DB)
 
   if (req.method === 'GET') {
     const query = req.query as {
@@ -39,11 +42,7 @@ export default async function handler(
       return
     }
 
-    const client = await clientPromise
-    const db = client.db('meta')
-
     // get app object
-
     const app = await db
       .collection('apps')
       .findOne({ aid }, { projection: { _id: 0 } })
@@ -66,9 +65,6 @@ export default async function handler(
 
       const appName = sanitize(body.name)
 
-      const client = await clientPromise
-      const db = client.db('meta')
-
       const data = {
         name: appName,
         aid: uuidv4(),
@@ -80,29 +76,24 @@ export default async function handler(
       res.status(201).json(data)
       return
     }
-  } else if (req.method === 'DELETE') {
-    if ('body' in req) {
-      const body = req.body as RequestBody
+  } else if (req.method === 'DELETE' && 'body' in req) {
+    const body = req.body as RequestBody
 
-      if (!body.aid) {
-        res.status(400).json({ error: 'aid is required' })
-        return
-      }
-
-      const aid = sanitize(body.aid)
-
-      const client = await clientPromise
-      const db = client.db('meta')
-
-      const query = {
-        aid,
-      }
-
-      // delete app
-      await db.collection('apps').deleteOne(query)
-
-      res.status(204).end()
+    if (!body.aid) {
+      res.status(400).json({ error: 'aid is required' })
       return
     }
+
+    const aid = sanitize(body.aid)
+
+    const query = {
+      aid,
+    }
+
+    // delete app
+    await db.collection('apps').deleteOne(query)
+
+    res.status(204).end()
+    return
   }
 }

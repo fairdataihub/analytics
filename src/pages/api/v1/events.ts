@@ -33,11 +33,14 @@ export default async function handler(
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 
+  const client = await clientPromise
+  const db = client.db(process.env.MONGODB_DB)
+
   if (req.method === 'POST') {
     if ('body' in req) {
       const body = req.body as RequestBody
 
-      let authorization = req.headers.authorization
+      let {authorization} = req.headers
 
       if (!authorization) {
         res.status(401).json({ error: 'authorization  is required' })
@@ -82,15 +85,10 @@ export default async function handler(
       const eventStatus = sanitize(body.status || '')
       const eventData = sanitize(body.data || '')
 
-      const client = await clientPromise
-      const metadb = client.db('meta')
-      const eventsdb = client.db('events')
-
       const ipAddress = requestIp.getClientIp(req)
 
       // verify user
-
-      const user = await metadb.collection('users').findOne({
+      const user = await db.collection('users').findOne({
         uid,
       })
 
@@ -105,8 +103,7 @@ export default async function handler(
       }
 
       // verify aid
-
-      const app = await metadb.collection('apps').findOne({
+      const app = await db.collection('apps').findOne({
         aid,
       })
 
@@ -125,7 +122,7 @@ export default async function handler(
         ipAddress,
       }
 
-      await eventsdb.collection(aid).insertOne(data)
+      await db.collection('events').insertOne(data)
 
       res.status(201).end()
       return

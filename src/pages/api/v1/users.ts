@@ -28,6 +28,9 @@ export default async function handler(
     optionsSuccessStatus: 200,
   })
 
+  const client = await clientPromise
+  const db = client.db(process.env.MONGODB_DB)
+
   if (req.method === 'POST') {
     if ('body' in req) {
       const body = req.body as RequestBody
@@ -43,9 +46,6 @@ export default async function handler(
         res.status(400).json({ error: 'uid is not a valid uuid' })
         return
       }
-
-      const client = await clientPromise
-      const db = client.db('meta')
 
       const data = {
         uid,
