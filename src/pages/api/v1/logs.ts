@@ -47,7 +47,6 @@ export default async function handler(
 
       const uid = sanitize(body.uid) // user id
       const aid = sanitize(body.aid) // app id
-
       const stackTrace = sanitize(body.trace || '')
 
       const ipAddress = requestIp.getClientIp(req)

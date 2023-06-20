@@ -26,6 +26,7 @@ export default async function handler(
     origin: '*',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
+  
   const client = await clientPromise
   const db = client.db(process.env.MONGODB_DB)
 

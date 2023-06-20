@@ -61,15 +61,11 @@ export default async function handler(
       }
 
       const token = sanitize(authorization?.split(' ')[1])
-      console.log("token", token);
 
       if (validator.isUUID(token, 4)) {
-        console.log("uuid not valid")
         res.status(401).json({ error: 'authorization is not valid' })
         return
       }
-
-      console.log("valid token")
 
       if (!body.uid) {
         res.status(400).json({ error: 'uid is required' })
@@ -92,26 +88,22 @@ export default async function handler(
       const ipAddress = requestIp.getClientIp(req)
 
       // verify user
-      const check = await db.collection('users')
-      
       const user = await db.collection('users').findOne({
         uid,
       })
 
       if (!user) {
-        console.log("user not found")
         res.status(400).end()
         return
       }
 
       if (user.token !== token) {
-        console.log("token not valid")
         res.status(401).end()
         return
       }
 
       // verify aid
-      const app = await db.collection('meta').findOne({
+      const app = await db.collection('apps').findOne({
         aid,
       })
 
