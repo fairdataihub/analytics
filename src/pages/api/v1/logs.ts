@@ -28,6 +28,9 @@ export default async function handler(
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 
+  const client = await clientPromise
+  const db = client.db(process.env.MONGODB_DB)
+
   if (req.method === 'POST') {
     if ('body' in req) {
       const body = req.body as RequestBody
@@ -47,15 +50,10 @@ export default async function handler(
 
       const stackTrace = sanitize(body.trace || '')
 
-      const client = await clientPromise
-      const metadb = client.db('meta')
-      const logsdb = client.db('logs')
-
       const ipAddress = requestIp.getClientIp(req)
 
       // verify user
-
-      const user = await metadb.collection('users').findOne({
+      const user = await db.collection('users').findOne({
         uid,
       })
 
@@ -65,8 +63,7 @@ export default async function handler(
       }
 
       // verify aid
-
-      const app = await metadb.collection('apps').findOne({
+      const app = await db.collection('apps').findOne({
         aid,
       })
 
@@ -78,11 +75,12 @@ export default async function handler(
       const data = {
         timestamp: dayjs().unix(),
         uid,
+        aid,
         stackTrace,
         ipAddress,
       }
 
-      await logsdb.collection(aid).insertOne(data)
+      await db.collection('logs').insertOne(data)
 
       res.status(201).end()
       return
