@@ -19,7 +19,8 @@ type RequestBody = {
   category?: string
   action?: string
   status?: string
-  data?: string
+  data?: { [key: string]: any }
+  environment?: string
 }
 
 export default async function handler(
@@ -68,11 +69,13 @@ export default async function handler(
       }
 
       if (!body.uid) {
+        res.statusMessage = 'uid is required'
         res.status(400).json({ error: 'uid is required' })
         return
       }
 
       if (!body.aid) {
+        res.statusMessage = 'aid is required'
         res.status(400).json({ error: 'aid is required' })
         return
       }
@@ -93,11 +96,13 @@ export default async function handler(
       })
 
       if (!user) {
+        res.statusMessage = 'User not found'
         res.status(400).end()
         return
       }
 
       if (user.token !== token) {
+        res.statusMessage = 'Invalid token'
         res.status(401).end()
         return
       }
@@ -108,6 +113,7 @@ export default async function handler(
       })
 
       if (!app) {
+        res.statusMessage = 'App not found'
         res.status(400).end()
         return
       }
