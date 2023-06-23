@@ -4,8 +4,17 @@ import { z } from 'zod'
 import NextCors from 'nextjs-cors'
 import { v4 as uuidv4 } from 'uuid'
 import sanitize from 'mongo-sanitize'
+import dayjs from 'dayjs'
+import { SignJWT } from 'jose'
 
 import clientPromise from '../../../lib/mongodb'
+
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET is not set in the environment variables.')
+}
+
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
+const JWT_ALG = 'HS256'
 
 type ResponseData = {
   uid?: string
@@ -45,36 +54,36 @@ export default async function handler(
       }
 
       const uid = sanitize(body.data.uid || uuidv4())
+      const timestamp = dayjs().unix()
+
+      const token = await new SignJWT({
+        uid,
+        timestamp,
+      })
+        .setProtectedHeader({ alg: JWT_ALG })
+        .setIssuedAt()
+        .sign(JWT_SECRET)
 
       const data = {
         uid,
-        token: uuidv4().replace(/-/g, ''),
+        token,
       }
 
       const query = {
         uid,
       }
 
-      /**
-       * TODO: genrate a timstamp and store it in the user jwt
-       */
-
       // check if user exists
       const user = await db.collection('users').findOne(query)
 
-      if (user) {
-        // update user
-        await db.collection('users').updateOne(query, { $set: data })
-
-        res.status(201).json(data)
-      } else {
+      if (!user) {
         // create user
-        await db.collection('users').insertOne(data)
-
-        res.status(201).json(data)
-
-        return
+        await db.collection('users').insertOne({ uid })
       }
+
+      res.status(201).json(data)
+
+      return
     } else {
       res.status(400).json({ error: 'Invalid request' })
 
