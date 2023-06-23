@@ -2,24 +2,31 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import NextCors from 'nextjs-cors'
 import dayjs from 'dayjs'
+import { z } from 'zod'
 import requestIp from 'request-ip'
 import sanitize from 'mongo-sanitize'
 
 import clientPromise from '../../../lib/mongodb'
 
-type Data = {
+type ResponseData = {
   error?: string
 }
 
-type RequestBody = {
-  uid?: string
-  aid?: string
-  trace?: string
-}
+const headersSchema = z.object({
+  authorization: z.string().min(1),
+})
+
+const bodySchema = z
+  .object({
+    uid: z.string().uuid(),
+    aid: z.string().uuid(),
+    trace: z.string(),
+  })
+  .strict()
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResponseData>
 ) {
   // Run the cors middleware
   await NextCors(req, res, {
@@ -33,62 +40,67 @@ export default async function handler(
 
   if (req.method === 'POST') {
     if ('body' in req) {
-      const body = req.body as RequestBody
+      const headers = headersSchema.safeParse(req.headers)
 
-      if (!body.uid) {
-        res.status(400).json({ error: 'uid is required' })
+      if (!headers.success) {
+        console.log(headers.error)
+
+        res.status(401).json({ error: 'The provided headers are invalid.' })
         return
       }
 
-      if (!body.aid) {
-        res.status(400).json({ error: 'aid is required' })
+      const authorization = headers.data.authorization
+
+      /**
+       * TODO: check if authorization is valid JWT
+       */
+
+      const body = bodySchema.safeParse(req.body)
+
+      if (!body.success) {
+        console.log(body.error)
+
+        res.status(400).json({ error: 'The provided body is invalid.' })
+
         return
       }
 
-      const uid = sanitize(body.uid) // user id
-      const aid = sanitize(body.aid) // app id
-      const stackTrace = sanitize(body.trace || '')
+      const sanitizedBody = sanitize(body.data)
+
+      const uid = sanitize(sanitizedBody.uid) // user id
+      const aid = sanitize(sanitizedBody.aid) // app id
+      const trace = sanitize(sanitizedBody.trace)
 
       const ipAddress = requestIp.getClientIp(req)
 
-      // verify user
-      const user = await db.collection('users').findOne({
-        uid,
-      })
-
-      if (!user) {
-        res.status(400).end()
-        return
-      }
-
-      // verify aid
-      const app = await db.collection('apps').findOne({
-        aid,
-      })
-
-      if (!app) {
-        res.status(400).end()
-        return
-      }
+      /**
+       * TODO: check if app exists (do this in a github action)
+       */
 
       const data = {
         timestamp: dayjs().unix(),
+
         uid,
         aid,
-        stackTrace,
+
+        trace,
+
         ipAddress,
       }
 
       await db.collection('logs').insertOne(data)
 
       res.status(201).end()
+
       return
     } else {
       res.status(400).json({ error: 'Invalid request' })
+
       return
     }
   } else {
     res.status(405).end()
+
     return
   }
 }
