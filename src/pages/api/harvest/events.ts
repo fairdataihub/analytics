@@ -13,24 +13,20 @@ if (!process.env.JWT_SECRET) {
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 
-type ResponseData = {
-  version?: string
-  error?: string
-}
-
 const bodySchema = z
   .object({
     aid: z.string().uuid(),
     category: z.string().min(1),
     action: z.string().min(1),
-    status: z.string().min(1),
+    status: z.union([z.literal('success'), z.literal('failure')]).optional(),
+    label: z.string().min(1).optional(),
     data: z.record(z.unknown()).optional(),
   })
   .strict()
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<EventsAPIResponse>
 ) {
   // Run the cors middleware
   await NextCors(req, res, {
@@ -63,33 +59,33 @@ export default async function handler(
         return
       }
 
-      const sanitizedBody = sanitize(body.data)
+      const { aid, category, action, label, status, data } = sanitize(body.data)
 
-      const aid = sanitizedBody.aid // app id
+      const eventDetails: EventsDatabaseEntry = {
+        uid,
+        aid,
+        eventCategory: category,
+        eventAction: action,
+        timestamp: dayjs().unix(),
+      }
 
-      const eventCategory = sanitizedBody.category
-      const eventAction = sanitizedBody.action
-      const eventStatus = sanitizedBody.status
-      const eventData = sanitizedBody.data
+      if (label) {
+        eventDetails.eventLabel = label
+      }
+
+      if (status) {
+        eventDetails.eventStatus = status
+      }
+
+      if (data) {
+        eventDetails.eventData = data
+      }
 
       /**
        * TODO: check if app exists (do this in a github action)
        */
 
-      const data = {
-        timestamp: dayjs().unix(),
-
-        uid,
-        aid,
-
-        eventCategory,
-        eventAction,
-        eventStatus,
-
-        eventData,
-      }
-
-      await db.collection('events').insertOne(data)
+      await db.collection('events').insertOne(eventDetails)
 
       res.status(201).end()
 

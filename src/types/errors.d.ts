@@ -1,0 +1,3 @@
+interface ApiErrorResponse {
+  error: string
+}

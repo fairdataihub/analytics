@@ -36,3 +36,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# dev api testing endpoint
+src/pages/api/dev.ts

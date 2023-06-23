@@ -6,12 +6,6 @@ import { z } from 'zod'
 
 import clientPromise from '../../../lib/mongodb'
 
-type ResponseData = {
-  name?: string
-  aid?: string
-  error?: string
-}
-
 const bodySchema = z
   .object({
     name: z.string().min(1),
@@ -27,7 +21,7 @@ const querySchema = z
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<AppsAPIResponse>
 ) {
   await NextCors(req, res, {
     methods: ['POST'],

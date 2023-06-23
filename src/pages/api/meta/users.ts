@@ -15,12 +15,6 @@ if (!process.env.JWT_SECRET) {
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 const JWT_ALG = 'HS256'
 
-type ResponseData = {
-  uid?: string
-  token?: string
-  error?: string
-}
-
 const bodySchema = z
   .object({
     uid: z.string().uuid().optional(),
@@ -29,7 +23,7 @@ const bodySchema = z
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<UsersAPIResponse>
 ) {
   // Run the cors middleware
   await NextCors(req, res, {
