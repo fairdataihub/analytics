@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
 import { jwtVerify } from 'jose'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 if (!process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET is not set in the environment variables.')

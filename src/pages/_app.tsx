@@ -1,6 +1,6 @@
+import { MantineProvider } from '@mantine/core'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import { MantineProvider } from '@mantine/core'
 
 import '../styles/globals.css'
 

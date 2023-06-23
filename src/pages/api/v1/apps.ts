@@ -1,9 +1,8 @@
+import sanitize from 'mongo-sanitize'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { z } from 'zod'
-
 import NextCors from 'nextjs-cors'
 import { v4 as uuidv4 } from 'uuid'
-import sanitize from 'mongo-sanitize'
+import { z } from 'zod'
 
 import clientPromise from '../../../lib/mongodb'
 
