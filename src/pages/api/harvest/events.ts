@@ -3,7 +3,6 @@ import { jwtVerify } from 'jose'
 import sanitize from 'mongo-sanitize'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
-import requestIp from 'request-ip'
 import { z } from 'zod'
 
 import clientPromise from '../../../lib/mongodb'
@@ -25,7 +24,7 @@ const bodySchema = z
     category: z.string().min(1),
     action: z.string().min(1),
     status: z.string().min(1),
-    data: z.record(z.object({})).optional(),
+    data: z.object({}).optional(),
   })
   .strict()
 
@@ -73,8 +72,6 @@ export default async function handler(
       const eventStatus = sanitizedBody.status
       const eventData = sanitizedBody.data
 
-      const ipAddress = requestIp.getClientIp(req)
-
       /**
        * TODO: check if app exists (do this in a github action)
        */
@@ -90,8 +87,6 @@ export default async function handler(
         eventStatus,
 
         eventData,
-
-        ipAddress,
       }
 
       await db.collection('events').insertOne(data)
