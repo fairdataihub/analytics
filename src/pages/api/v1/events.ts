@@ -1,31 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import NextCors from 'nextjs-cors'
-import validator from 'validator'
+import { z } from 'zod'
 import dayjs from 'dayjs'
 import requestIp from 'request-ip'
 import sanitize from 'mongo-sanitize'
 
 import clientPromise from '../../../lib/mongodb'
 
-type Data = {
+type ResponseData = {
   version?: string
   error?: string
 }
 
-type RequestBody = {
-  uid?: string
-  aid?: string
-  category?: string
-  action?: string
-  status?: string
-  data?: { [key: string]: any }
-  environment?: string
-}
+const bodySchema = z
+  .object({
+    uid: z.string().uuid(),
+    aid: z.string().uuid(),
+    category: z.string().min(1),
+    action: z.string().min(1),
+    status: z.string().min(1),
+    data: z.record(z.object({})).optional(),
+  })
+  .strict()
+
+const headersSchema = z.object({
+  authorization: z.string().min(1),
+})
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResponseData>
 ) {
   // Run the cors middleware
   await NextCors(req, res, {
@@ -39,105 +44,74 @@ export default async function handler(
 
   if (req.method === 'POST') {
     if ('body' in req) {
-      const body = req.body as RequestBody
+      const headers = headersSchema.safeParse(req.headers)
 
-      let {authorization} = req.headers
+      if (!headers.success) {
+        console.log(headers.error)
 
-      if (!authorization) {
-        res.status(401).json({ error: 'authorization  is required' })
+        res.status(401).json({ error: 'The provided headers are invalid.' })
         return
       }
 
-      if (typeof authorization === 'string') {
-        authorization = authorization.trim()
-      } else {
-        res.status(401).json({ error: 'authorization is not valid' })
+      const authorization = headers.data.authorization
+
+      /**
+       * TODO: check if authorization is valid JWT
+       */
+
+      const body = bodySchema.safeParse(req.body)
+
+      if (!body.success) {
+        console.log(body.error)
+
+        res.status(400).json({ error: 'The provided body is invalid.' })
         return
       }
 
-      // check if space in the authorization header
-      if (authorization.indexOf(' ') === -1) {
-        res.status(401).json({ error: 'authorization is not valid' })
-        return
-      }
+      const sanitizedBody = sanitize(body.data)
 
-      const token = sanitize(authorization?.split(' ')[1])
+      const uid = sanitizedBody.uid // user id
+      const aid = sanitizedBody.aid // app id
 
-      if (validator.isUUID(token, 4)) {
-        res.status(401).json({ error: 'authorization is not valid' })
-        return
-      }
-
-      if (!body.uid) {
-        res.statusMessage = 'uid is required'
-        res.status(400).json({ error: 'uid is required' })
-        return
-      }
-
-      if (!body.aid) {
-        res.statusMessage = 'aid is required'
-        res.status(400).json({ error: 'aid is required' })
-        return
-      }
-
-      const uid = sanitize(body.uid) // user id
-      const aid = sanitize(body.aid) // app id
-
-      const eventCategory = sanitize(body.category || '')
-      const eventAction = sanitize(body.action || '')
-      const eventStatus = sanitize(body.status || '')
-      const eventData = sanitize(body.data || '')
+      const eventCategory = sanitizedBody.category
+      const eventAction = sanitizedBody.action
+      const eventStatus = sanitizedBody.status
+      const eventData = sanitizedBody.data
 
       const ipAddress = requestIp.getClientIp(req)
 
-      // verify user
-      const user = await db.collection('users').findOne({
-        uid,
-      })
-
-      if (!user) {
-        res.statusMessage = 'User not found'
-        res.status(400).end()
-        return
-      }
-
-      if (user.token !== token) {
-        res.statusMessage = 'Invalid token'
-        res.status(401).end()
-        return
-      }
-
-      // verify aid
-      const app = await db.collection('apps').findOne({
-        aid,
-      })
-
-      if (!app) {
-        res.statusMessage = 'App not found'
-        res.status(400).end()
-        return
-      }
+      /**
+       * TODO: check if app exists (do this in a github action)
+       */
 
       const data = {
         timestamp: dayjs().unix(),
+
         uid,
+        aid,
+
         eventCategory,
         eventAction,
         eventStatus,
+
         eventData,
+
         ipAddress,
       }
 
       await db.collection('events').insertOne(data)
 
       res.status(201).end()
+
       return
     } else {
-      res.status(400).json({ error: 'Invalid request' })
+      res.status(400).json({ error: 'The provided body is invalid.' })
+
       return
     }
   } else {
     res.status(405).end()
+
     return
   }
 }
