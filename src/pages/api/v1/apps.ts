@@ -115,5 +115,45 @@ export default async function handler(
     res.status(204).end()
 
     return
+  } else if (req.method === 'PUT' && `body` in req) {
+    const body = bodySchema.safeParse(req.body)
+
+    if (!body.success) {
+      console.log(body.error)
+
+      res.status(400).json({ error: 'The provided request body is invalid.' })
+      return
+    }
+
+    const aid = sanitize(body.data.aid)
+    const appName = sanitize(body.data.name)
+
+    const query = {
+      aid,
+    }
+
+    const update = {
+      $set: {
+        name: appName,
+      },
+    }
+
+    // get app object
+    const app = await db
+      .collection('apps')
+      .findOne(query, { projection: { _id: 0 } })
+
+    if (!app) {
+      res.status(404).json({ error: 'Requested app not found' })
+
+      return
+    }
+
+    // update app
+    await db.collection('apps').updateOne(query, update)
+
+    res.status(204).end()
+
+    return
   }
 }
