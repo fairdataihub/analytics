@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint --ignore-path .gitignore \"./**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .gitignore \"./**/*.+(ts|js|tsx)\" --write"
   },
   "dependencies": {
     "@emotion/react": "11.11.1",
@@ -26,10 +28,10 @@
     "cors": "2.8.5",
     "dayjs": "1.11.8",
     "embla-carousel-react": "7.1.0",
+    "jose": "^4.14.4",
     "mongo-sanitize": "1.1.0",
     "mongodb": "5.6.0",
-    "nanoid": "^4.0.2",
-    "next": "latest",
+    "next": "^13.4.7",
     "next-auth": "4.20.1",
     "nextjs-cors": "2.1.2",
     "react": "18.2.0",
@@ -47,12 +49,19 @@
     "@types/request-ip": "0.0.38",
     "@types/uuid": "9.0.2",
     "@types/validator": "13.7.17",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
     "autoprefixer": "10.4.14",
-    "eslint": "8.43.0",
-    "eslint-config-next": "13.4.6",
+    "eslint": "^8.43.0",
+    "eslint-config-next": "^13.4.7",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "postcss": "8.4.24",
-    "prettier": "2.8.8",
-    "prettier-plugin-tailwindcss": "0.3.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.3"
   }

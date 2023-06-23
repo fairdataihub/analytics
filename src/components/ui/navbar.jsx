@@ -1,15 +1,9 @@
-import Link from 'next/link'
-
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-
-import { useSession, signIn, signOut } from 'next-auth/react'
-
-import { Group, Button } from '@mantine/core'
-
 import { Icon } from '@iconify/react'
+import { Button,Group } from '@mantine/core'
+import Link from 'next/link'
+import { signIn, signOut,useSession } from 'next-auth/react'
 
-export default function Navbar(props) {
+export default function Navbar(_props) {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -18,12 +12,10 @@ export default function Navbar(props) {
     },
   })
 
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
 
-  const toggleMobileMenu = () => {
-    setIsOpen(!isOpen)
-  }
+ 
+
+
 
   return (
     <nav className="min-w-screen sticky top-0 z-30 shadow-lg ">

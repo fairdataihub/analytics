@@ -1,24 +1,25 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-import NextCors from 'nextjs-cors'
 import dayjs from 'dayjs'
-import { z } from 'zod'
-import requestIp from 'request-ip'
+import { jwtVerify } from 'jose'
 import sanitize from 'mongo-sanitize'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import NextCors from 'nextjs-cors'
+import requestIp from 'request-ip'
+import { z } from 'zod'
 
 import clientPromise from '../../../lib/mongodb'
+
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET is not set in the environment variables.')
+}
+
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 
 type ResponseData = {
   error?: string
 }
 
-const headersSchema = z.object({
-  authorization: z.string().min(1),
-})
-
 const bodySchema = z
   .object({
-    uid: z.string().uuid(),
     aid: z.string().uuid(),
     trace: z.string(),
   })
@@ -40,20 +41,15 @@ export default async function handler(
 
   if (req.method === 'POST') {
     if ('body' in req) {
-      const headers = headersSchema.safeParse(req.headers)
+      const headers = req.headers
 
-      if (!headers.success) {
-        console.log(headers.error)
+      const authorization = headers.authorization as string
 
-        res.status(401).json({ error: 'The provided headers are invalid.' })
-        return
-      }
+      const token = authorization.split(' ')[1]
 
-      const authorization = headers.data.authorization
+      const decoded = await jwtVerify(token, JWT_SECRET)
 
-      /**
-       * TODO: check if authorization is valid JWT
-       */
+      const uid = decoded.payload.uid as string
 
       const body = bodySchema.safeParse(req.body)
 
@@ -67,7 +63,6 @@ export default async function handler(
 
       const sanitizedBody = sanitize(body.data)
 
-      const uid = sanitize(sanitizedBody.uid) // user id
       const aid = sanitize(sanitizedBody.aid) // app id
       const trace = sanitize(sanitizedBody.trace)
 

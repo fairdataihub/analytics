@@ -1,19 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+
 import clientPromise from '../lib/mongodb'
 
-interface GSSRProps {
-  isConnected: boolean
-}
-
 const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
-  const router = useRouter()
-
-  function copyText(entryText: string) {
-    navigator.clipboard.writeText(entryText)
-  }
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -102,7 +93,7 @@ const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (_context) => {
   try {
     //? client.db() will be the default database passed in the MONGODB_URI
     //? You can change the database by calling the client.db() function and specifying a database like:
