@@ -24,7 +24,11 @@ const bodySchema = z
     category: z.string().min(1),
     action: z.string().min(1),
     status: z.string().min(1),
-    data: z.object({}).optional(),
+    data: z
+      .object({
+        '*': z.unknown(),
+      })
+      .optional(),
   })
   .strict()
 
