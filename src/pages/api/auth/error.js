@@ -1,6 +1,6 @@
 export default function accessDenied(req, res) {
-  const { error } = req.query;
-  console.log(error);
+  const { error } = req.query
+  console.log(error)
 
   if (error === 'AccessDenied') {
     res.status(401).send(`
@@ -25,7 +25,7 @@ export default function accessDenied(req, res) {
         </div>
       </body>
     </html>
-    `);
+    `)
   } else {
     // Handle other error codes or return a default error page
     res.status(500).send(`
@@ -42,6 +42,6 @@ export default function accessDenied(req, res) {
           <p class="text-lg text-gray-700 mb-8">Something went wrong.</p>
         </body>
       </html>
-    `);
+    `)
   }
 }

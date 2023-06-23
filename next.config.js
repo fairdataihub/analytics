@@ -5,4 +5,3 @@ module.exports = {
     domains: ['cdn.example.com', 'avatars.githubusercontent.com'],
   },
 }
-

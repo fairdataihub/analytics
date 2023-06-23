@@ -5,8 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ignore-path .gitignore \"./**/*.+(ts|js|tsx)\"",
-    "format": "prettier --ignore-path .gitignore \"./**/*.+(ts|js|tsx)\" --write"
+    "lint": "eslint --ignore-path .gitignore \"./**/*.+(ts|js|tsx|jsx)\"",
+    "format": "prettier --ignore-path .gitignore \"./**/*.+(ts|js|tsx|jsx)\" --write"
   },
   "dependencies": {
     "@emotion/react": "11.11.1",
