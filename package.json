@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/cors": "2.8.13",
     "@types/mongo-sanitize": "1.0.1",
-    "@types/node": "18.16.19",
+    "@types/node": "18.17.0",
     "@types/react": "18.2.15",
     "@types/request-ip": "0.0.38",
     "@types/uuid": "9.0.2",
