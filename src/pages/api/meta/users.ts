@@ -60,6 +60,7 @@ export default async function handler(
       const data = {
         uid,
         token,
+        userCreated: timestamp,
       }
 
       const query = {
@@ -70,8 +71,15 @@ export default async function handler(
       const user = await db.collection('users').findOne(query)
 
       if (!user) {
+        console.log('create new user')
         // create user
-        await db.collection('users').insertOne({ uid })
+        await db.collection('users').insertOne({ uid, userCreated: timestamp })
+      } else if (!user?.userCreated) {
+        console.log('userCreatedDate NA')
+        // update user with date_created for analytics
+        await db
+          .collection('users')
+          .updateOne({ uid }, { $set: { userCreated: timestamp } })
       }
 
       res.status(201).json(data)
