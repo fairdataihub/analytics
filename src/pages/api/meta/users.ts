@@ -75,7 +75,6 @@ export default async function handler(
         // create user
         await db.collection('users').insertOne({ uid, userCreated: timestamp })
       } else if (!user?.userCreated) {
-        console.log('userCreatedDate NA')
         // update user with date_created for analytics
         await db
           .collection('users')
