@@ -16,10 +16,16 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./*"],
       "@/public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/profile.jsx", "src/components/ui/navbar.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/profile.jsx",
+    "components/ui/navbar.jsx"
+  ],
   "exclude": ["node_modules"]
 }

@@ -26,7 +26,6 @@ A lightweight, open-source, and privacy-friendly app-usage tracking platform tha
     <img src="https://img.shields.io/github/license/fairdataihub/analytics.svg?style=flat-square" alt="license" />
   </a>
 </p>
-   
 <h4>
     <a href="#">Documentation</a>
   <span> · </span>
@@ -54,7 +53,6 @@ Kombucha Analytics also offers advanced alert monitoring capabilities, ensuring 
 It is important to note that Kombucha is not intended for user or web tracking purposes. Rather, it operates as a REST web endpoint, allowing developers to intentionally store data from any source that accesses the internet. By default, Kombucha does not automatically track click events, page navigation, or similar user interactions. Developers must intentionally send this information if they wish to store it on the platform.
 Choose Kombucha Analytics as your go-to solution for powerful, privacy-conscious, and user-friendly app usage tracking.
 
-
 ## Getting Started
 
 ### Prerequisites/Dependencies
@@ -71,38 +69,41 @@ Choose Kombucha Analytics as your go-to solution for powerful, privacy-conscious
 
 **User Authentication:** The app authenticates users using OAuth2 and integrates with the GitHub API. This allows users to securely log in to the application using their GitHub credentials.
 
-
 ### Installing
 
 To set up the project locally, follow these steps:
 
 Clone the repository:
+
 ```bash
 git clone https://github.com/fairdataihub/analytics.git
 ```
 
 Install the required dependencies:
+
 ```bash
 yarn install
 ```
 
 Configure the OAuth2 authentication with the FairdataiHub organization's credentials (or your own Oauth2 credentials), and obtain the client ID and client secret.
 Create a `.env.local` file in the root directory of the project and add the following environment variables:
+
 ```bash
-MONGODB_URI
-MONGODB_DBNAME
-GITHUB_ID
-GITHUB_SECRET
-GITHUB_ORG
-NEXTAUTH_SECRET
+MONGODB_URI=
+MONGODB_DBNAME=
+GITHUB_ID=
+GITHUB_SECRET=
+GITHUB_ORG=
+NEXTAUTH_SECRET=
 ```
 
 Start the application:
+
 ```bash
 yarn dev
 ```
 
-Access the application in your browser at http://localhost:3000
+Access the application in your browser at <http://localhost:3000>
 
 >**Note**:
 >Signing in to the application requires a GitHub account that is a member of the FairdataiHub organization. To change to a different organization, update the `GITHUB_ORG` environment variable in the `.env.local` file.
