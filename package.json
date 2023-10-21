@@ -54,7 +54,7 @@
     "@types/mongo-sanitize": "1.0.1",
     "@types/node": "18.18.5",
     "@types/react": "18.2.28",
-    "@types/request-ip": "0.0.39",
+    "@types/request-ip": "0.0.40",
     "@types/uuid": "9.0.5",
     "@types/validator": "13.11.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
