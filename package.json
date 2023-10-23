@@ -36,7 +36,7 @@
     "jose": "^4.14.4",
     "lucide-react": "^0.287.0",
     "mongo-sanitize": "1.1.0",
-    "mongodb": "6.1.0",
+    "mongodb": "6.2.0",
     "next": "^13.4.7",
     "next-auth": "4.24.3",
     "nextjs-cors": "2.1.2",
