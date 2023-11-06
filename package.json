@@ -33,7 +33,7 @@
     "dayjs": "1.11.10",
     "embla-carousel-react": "7.1.0",
     "is-localhost-ip": "^2.0.0",
-    "jose": "^4.14.4",
+    "jose": "^5.0.0",
     "lucide-react": "^0.292.0",
     "mongo-sanitize": "1.1.0",
     "mongodb": "6.2.0",
