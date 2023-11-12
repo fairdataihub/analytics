@@ -4,6 +4,7 @@
   "stabilityDays": 3,
   "prCreation": "not-pending",
   "labels": ["type: dependencies"],
+  "enabled": false,
   "packageRules": [
     {
       "packageNames": ["node"],
